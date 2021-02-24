@@ -1,13 +1,14 @@
 ﻿using GameOfLife;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace ConwaysGameOfLife
 {
-    public class GUI : Form
+    public partial class GUI : Form
     {
         Board board;
         DateTime _lastCheckTime;
@@ -169,10 +170,13 @@ namespace ConwaysGameOfLife
         
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            string fps = Math.Round(GetFps()).ToString(CultureInfo.InvariantCulture);
+            double fps = Math.Round(GetFps());
             int aliveCells = board.AliveCells();
-            float percentAlive = (aliveCells == 0) ? 0 : (float)Math.Round(((float)aliveCells) / (board.Rows * board.Columns) * 100, 2);
-            this.Text = "Game of Life | " + fps + " fps | " + aliveCells.ToString() + " cells alive" + " (" + percentAlive.ToString(CultureInfo.InvariantCulture) + "%)";
+            double percentAlive = (aliveCells == 0) ? 0 : Math.Round(((double)aliveCells) / (board.Rows * board.Columns) * 100, 2);
+            this.Text = "Game of Life | " + 
+                fps.ToString(CultureInfo.InvariantCulture) + " fps | " + 
+                aliveCells.ToString() + " cells alive" + 
+                " (" + percentAlive.ToString(CultureInfo.InvariantCulture) + "%)";
         }
     }
 }
