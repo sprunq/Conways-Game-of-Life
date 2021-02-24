@@ -48,7 +48,9 @@ namespace GameOfLife
         public void RandomPattern()
         {
             foreach (var cell in Cells)
+            {
                 cell.isAlive = rand.Next(0, 2) == 0;
+            }
         }
 
         ///<summary>
@@ -57,7 +59,9 @@ namespace GameOfLife
         public void Genocide()
         {
             foreach (var cell in Cells)
+            {
                 cell.isAlive = false;
+            }
         }
 
         ///<summary>
@@ -67,8 +71,12 @@ namespace GameOfLife
         {
             int aliveCells = 0;
             foreach (var cell in Cells)
+            {
                 if (cell.isAlive)
+                {
                     aliveCells++;
+                }
+            }
             return aliveCells;
 
         }
@@ -83,10 +91,12 @@ namespace GameOfLife
                 for(int y = 0; y < Rows; y++)
                 {
                     // Left Edge, Right Edge, Top Edge, Bottom Edge
-                    bool isEdge = (x == 0) | (x == Columns - 1) | (y == 0) | (y == Rows - 1);
+                    bool isEdge = (x == 0) || (x == Columns - 1) || (y == 0) || (y == Rows - 1);
 
                     if ((wrap == false) && isEdge)
+                    {
                         continue;
+                    }
 
                     // determine the left and right cells with wrapping
                     int xLeft = (x > 0) ? x - 1 : Columns - 1;
