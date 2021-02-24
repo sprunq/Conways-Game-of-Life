@@ -43,8 +43,12 @@ namespace ConwaysGameOfLife
                 int xOffset = (board.Columns - lines[0].Length) / 2;
 
                 for (int y = 0; y < lines.Length; y++)
+                {
                     for (int x = 0; x < lines[y].Length; x++)
+                    {
                         board.Cells[x + xOffset, y + yOffset].isAlive = lines[y].Substring(x, 1) == "X";
+                    }
+                }
             }
             Render();
         }
@@ -100,9 +104,13 @@ namespace ConwaysGameOfLife
             int yOffset = (board.Rows - lines.Length) / 2;
             int xOffset = (board.Columns - lines[0].Length) / 2;
             if (longestLineLength + xOffset >= board.Columns || lines.GetLength(0) + yOffset >= board.Rows)
+            {
                 return false;
+            }
             else
+            {
                 return true;
+            }
         }
 
         ///<summary>
@@ -144,9 +152,13 @@ namespace ConwaysGameOfLife
         {
             string input = ManualInputBox.Text;
             if (PatternInsideBoundries(input))
+            {
                 Reset(input);
+            }
             else
+            {
                 Reset();
+            }
         }
         
         private void RandomButton_Click(object sender, EventArgs e)
@@ -157,10 +169,10 @@ namespace ConwaysGameOfLife
         
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            string fps = Math.Round(GetFps()).ToString();
-            float aliveCells = board.AliveCells();
-            float percentAlive = aliveCells == 0 ? 0 : (float)Math.Round((aliveCells) / (board.Rows * board.Columns) * 100, 2);
-            this.Text = "Game of Life | " + fps + " fps | " + aliveCells.ToString() + " cells alive" + " (" + percentAlive.ToString() + "%)";
+            string fps = Math.Round(GetFps()).ToString(CultureInfo.InvariantCulture);
+            int aliveCells = board.AliveCells();
+            float percentAlive = (aliveCells == 0) ? 0 : (float)Math.Round(((float)aliveCells) / (board.Rows * board.Columns) * 100, 2);
+            this.Text = "Game of Life | " + fps + " fps | " + aliveCells.ToString() + " cells alive" + " (" + percentAlive.ToString(CultureInfo.InvariantCulture) + "%)";
         }
     }
 }
