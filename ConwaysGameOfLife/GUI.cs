@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ConwaysGameOfLife
 {
-    public partial class GUI : Form
+    public class GUI : Form
     {
         Board board;
         DateTime _lastCheckTime;
